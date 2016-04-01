@@ -1,28 +1,29 @@
 function hiconversion_callback(arg) {
-  var waitTime = 60000; 
+  var waitTime = 60000;
   var then = new Date();
-  hiconversion_callback_helper(arg.frame,then,waitTime);
-  return {kind:"ok",frame:arg.frame};
+  hiconversion_callback_helper(arg.frame, then, waitTime);
+  return {
+    kind: "ok",
+    frame: arg.frame
+  };
 }
-
-
-
-function hiconversion_callback_helper(frame,then,waitTime){
-  var here = frame.document;
+function hiconversion_callback_helper(frame, then, waitTime) {
   var performedUpdate = false;
-  var wrap = here.getElementById("signInOverlayOpen");
-  if ( wrap != null ) {
-    wrap.style.background = "url(none) no-repeat transparent";
-    wrap.style.color = "#000000";
-    wrap.style.fontWeight = "normal";
-    wrap.style.textDecoration = "underline";
+  if (frame.jQuery) {
+    var $ = frame.jQuery;
+    var app = frame.app;
+    $(document).ready(function() {
+
+    });
     performedUpdate = true;
   }
-  if(!performedUpdate){
+  if (!performedUpdate) {
     var now = new Date();
     var dif = now - then;
     if (dif < waitTime) {
-      frame.setTimeout(function(){hiconversion_callback_helper(frame,then,waitTime);},100);
+      frame.setTimeout(function() {
+        hiconversion_callback_helper(frame, then, waitTime);
+      }, 100);
     }
   }
 }
