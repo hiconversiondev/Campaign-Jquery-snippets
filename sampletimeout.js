@@ -11,7 +11,6 @@ function hiconversion_callback_helper(frame, then, waitTime) {
   var performedUpdate = false;
   if (frame.jQuery) {
     var $ = frame.jQuery;
-    var app = frame.app;
     $(document).ready(function() {
 
     });
